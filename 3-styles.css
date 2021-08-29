@@ -1,0 +1,198 @@
+:root {
+  --button-size: 5.6rem;
+  --item-size: 4.2rem;
+  --button-scale: scale(0.8);
+  --line-width: 1.8rem;
+  --line-height: 0.18rem;
+  --line-separation: 12%;
+  --icon-color: white;
+  --icon-font-size: 1.5rem;
+  --button-color: #c81938;
+  --button-border: #881329;
+  --move-relation: 5.2rem;
+  --fa-transition: transform 0.4s 0.6s, color 0.1s, background 0.1s;
+  --fa-transition-back: transform 0.3s 0s, color 0.1s, background 0.1s;
+  --button-scale-transition: 0.4s ease;
+  --x-transition: 90ms ease-in-out;
+}
+
+.menu {
+  width: var(--button-size);
+  height: var(--button-size);
+  position: relative;
+  margin: 15px;
+}
+
+.menu .menu-open {
+  width: 0;
+  height: 0;
+  position: absolute;
+  margin: 0;
+}
+.menu .menu-open-button {
+  /* display: block; */
+  z-index: 10;
+  margin: 0;
+  position: absolute;
+  box-sizing: border-box;
+  left: 0;
+  /* transform: scale(0.65); */
+}
+
+.menu-line {
+  background: var(--icon-color);
+  width: var(--line-width);
+  height: var(--line-height);
+  display: block;
+  position: absolute;
+  margin: 0;
+  transition: var(--x-transition);
+}
+
+.menu-line.menu-line-1 {
+  top: calc(50% - var(--line-separation));
+}
+.menu-line.menu-line-2 {
+  top: 50%;
+}
+.menu-line.menu-line-3 {
+  top: calc(50% + var(--line-separation));
+}
+
+.menu-item {
+  text-decoration: none;
+}
+
+.menu .menu-open-button,
+.menu .fa {
+  background: var(--button-color);
+  border: 1px solid var(--button-border);
+  border-radius: 50%;
+  color: var(--icon-color);
+  font-size: var(--icon-font-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.menu .menu-open-button {
+  width: var(--button-size);
+  height: var(--button-size);
+}
+
+.menu .fa {
+  width: var(--item-size);
+  height: var(--item-size);
+  /* background: blue; */
+
+  left: calc(0% + var(--button-size) / 2 - var(--item-size) / 2);
+  top: calc(0% + var(--button-size) / 2 - var(--item-size) / 2);
+}
+
+.menu .fa {
+  position: absolute;
+  transition: var(--fa-transition);
+}
+
+.menu .fa:hover {
+  background: var(--icon-color);
+  color: var(--button-color);
+}
+
+.menu .menu-open:checked + .menu-open-button {
+  animation: 0.8s ease forwards button-click;
+  /* transform: var(--button-scale); */
+  transition: var(--button-scale-transition);
+}
+
+@keyframes button-click {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: var(--button-scale);
+  }
+}
+
+.menu .menu-open:not(:checked) + .menu-open-button {
+  animation: 1.8s ease forwards button-click-back;
+  /* animation-play-state: paused; */
+  /* transform: var(--button-scale); */
+  transition: var(--button-scale-transition);
+}
+
+.menu .menu-open:not(:checked) ~ .menu-item .fa {
+  transition: var(--fa-transition-back);
+}
+
+@keyframes button-click-back {
+  0% {
+    transform: var(--button-scale);
+  }
+  10% {
+    transform: scale(1.12);
+  }
+  25% {
+    transform: scale(1.12);
+  }
+  45% {
+    transform: scale(0.98);
+  }
+  65% {
+    transform: scale(0.98);
+  }
+  80% {
+    transform: scale(1.12);
+  }
+  90% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.menu .menu-open:checked + .menu-open-button .menu-line.menu-line-1 {
+  transform: rotate(45deg);
+  top: 50%;
+}
+
+.menu .menu-open:checked + .menu-open-button .menu-line.menu-line-2 {
+  width: 0;
+}
+
+.menu .menu-open:checked + .menu-open-button .menu-line.menu-line-3 {
+  transform: rotate(-45deg);
+  top: 50%;
+}
+
+.menu .menu-open:checked ~ .menu-item {
+  transform: scale(0.5);
+}
+
+.menu .menu-open:checked ~ .menu-item .fa.fa-area-chart {
+  transform: translateY(calc(1 * var(--move-relation)));
+}
+
+.menu .menu-open:checked ~ .menu-item .fa.fa-bar-chart {
+  transform: translateY(calc(2 * var(--move-relation)));
+}
+
+.menu .menu-open:checked ~ .menu-item .fa.fa-line-chart {
+  transform: translateY(calc(3 * var(--move-relation)));
+}
+
+.menu .menu-open:checked ~ .menu-item .fa.fa-pie-chart {
+  transform: translateY(calc(4 * var(--move-relation)));
+}
+
+.menu .menu-open:checked ~ .menu-item .fa.fa-table {
+  transform: translateY(calc(5 * var(--move-relation)));
+}
